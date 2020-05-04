@@ -4,7 +4,6 @@ ARG WP_VERSION=5.4
 
 RUN apk add -u --no-cache \
 	php7 \
-	php7-pecl-pcov \
 	php7-pecl-imagick \
 	php7-dom \
 	php7-mysqli \
@@ -15,6 +14,8 @@ RUN apk add -u --no-cache \
 	mysql-client \
 	imagemagick \
 	composer
+
+RUN apk add -u --no-cache php7-pecl-pcov --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 RUN wget -nv -O /tmp/wordpress.tar.gz https://wordpress.org/wordpress-${WP_VERSION}.tar.gz \
 	&& mkdir /wordpress \
