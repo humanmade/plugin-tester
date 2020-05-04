@@ -13,8 +13,7 @@ RUN apk add -u --no-cache \
 	mysql \
 	mysql-client \
 	imagemagick \
-	composer \
-	subversion
+	composer
 
 RUN wget -nv -O /tmp/wordpress.tar.gz https://wordpress.org/wordpress-${WP_VERSION}.tar.gz \
 	&& mkdir /wordpress \
