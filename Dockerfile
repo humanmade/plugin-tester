@@ -4,6 +4,7 @@ ARG WP_VERSION=5.4
 
 RUN apk add -u --no-cache \
 	php7 \
+	php7-pecl-pcov \
 	php7-pecl-imagick \
 	php7-dom \
 	php7-mysqli \
