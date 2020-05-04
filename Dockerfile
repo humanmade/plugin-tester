@@ -27,7 +27,7 @@ RUN wget -nv -O /tmp/wp-phpunit.tar.gz https://github.com/wp-phpunit/wp-phpunit/
 	&& rm /tmp/wp-phpunit.tar.gz
 
 RUN mysql_install_db --user=mysql --ldata=/var/lib/mysql
-RUN sh -c 'mysqld_safe --datadir=/var/lib/mysql &' && sleep 2 && mysql -u root -e "CREATE DATABASE wordpress"
+RUN sh -c 'mysqld_safe --datadir=/var/lib/mysql &' && sleep 4 && mysql -u root -e "CREATE DATABASE wordpress"
 
 ENV WP_DEVELOP_DIR=/wp-phpunit
 ENV WP_PHPUNIT__TESTS_CONFIG=/wp-tests-config.php
