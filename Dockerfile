@@ -10,6 +10,8 @@ RUN apk add -u --no-cache \
 	php7-xml \
 	php7-exif \
 	php7-simplexml \
+	php7-tokenizer \
+	php7-xmlwriter \
 	mysql \
 	mysql-client \
 	imagemagick \
