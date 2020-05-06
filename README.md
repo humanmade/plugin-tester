@@ -1,5 +1,7 @@
 # Plugin Tester
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/humanmade/plugin-tester)](https://hub.docker.com/repository/docker/humanmade/plugin-tester) [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/humanmade/plugin-tester)](https://hub.docker.com/repository/docker/humanmade/plugin-tester)
+
 Simple Docker image for running unit tests for WordPress plugins.
 
 To run the tests for your plugin, run this in your plugin directory:
