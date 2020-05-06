@@ -1,21 +1,31 @@
 # Plugin Tester
 
-Simple Docker image for running WordPress Unit Tests for plugins. To run the tests for you plugin, from the plugin directory:
+Simple Docker image for running unit tests for WordPress plugins.
+
+To run the tests for your plugin, run this in your plugin directory:
 
 ```
 docker run --rm -v $PWD:/code humanmade/plugin-tester
 ```
 
-The above assumes you have `phpunit/phpunit` specified as a Composer dependency of you plugin, and a `phpunit.dist.xml` in the plugin root.
+You will need `phpunit/phpunit` specified as a Composer dependency of your plugin. Additional arguments can be passed to PHPUnit on the CLI directly, e.g.:
 
-Also, your `tests` directory in your plugin should include a `bootstrap.php` including at least the following:
+```
+docker run --rm -v $PWD:/code humanmade/plugin-tester --stop-on-error
+```
+
+## Configuration
+
+To configure PHPUnit, place a `phpunit.dist.xml` in the plugin root. You can alternatively use the command line arguments for PHPUnit for simpler tests.
+
+Typically your `tests` directory in your plugin should include a `bootstrap.php` including at least the following:
 
 ```php
 <?php
 require '/wp-phpunit/includes/functions.php';
 
 tests_add_filter( 'muplugins_loaded', function () {
-	require dirname( __FILE__ ) . '/../s3-uploads.php';
+	require dirname( __FILE__ ) . '/../your-plugin-entry-point.php';
 } );
 
 require '/wp-phpunit/includes/bootstrap.php';
