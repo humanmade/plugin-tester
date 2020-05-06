@@ -4,14 +4,14 @@ Simple Docker image for running unit tests for WordPress plugins.
 
 To run the tests for your plugin, run this in your plugin directory:
 
-```
-docker run --rm -v $PWD:/code humanmade/plugin-tester
+```sh
+docker run --rm -v "$PWD:/code" humanmade/plugin-tester
 ```
 
 You will need `phpunit/phpunit` specified as a Composer dependency of your plugin. Additional arguments can be passed to PHPUnit on the CLI directly, e.g.:
 
-```
-docker run --rm -v $PWD:/code humanmade/plugin-tester --stop-on-error
+```sh
+docker run --rm -v "$PWD:/code" humanmade/plugin-tester --stop-on-error
 ```
 
 ## Configuration
@@ -44,5 +44,5 @@ composer require --dev pcov/clobber
 You can then set up coverage in your `phpunit.xml.dist`, or use the command-line flags:
 
 ```sh
-docker run --rm -v $PWD:/code humanmade/plugin-tester --coverage-text --whitelist inc/
+docker run --rm -v "$PWD:/code" humanmade/plugin-tester --coverage-text --whitelist inc/
 ```
