@@ -33,6 +33,31 @@ tests_add_filter( 'muplugins_loaded', function () {
 require '/wp-phpunit/includes/bootstrap.php';
 ```
 
+## Continuous Integration with Travis
+
+For Travis, the following minimal configuration will get your tests running:
+
+```yaml
+services:
+  - docker
+
+before_script:
+  - composer install
+
+script:
+  - docker run --rm -v "$PWD:/code" humanmade/plugin-tester
+```
+
+We recommend also [caching the vendor directory](https://docs.travis-ci.com/user/caching/#arbitrary-directories):
+
+```yaml
+cache:
+  timeout: 1000
+  directories:
+    - vendor
+```
+
+
 ## Code Coverage
 
 Plugin Tester includes [pcov](https://github.com/krakjoe/pcov) for test coverage, which is natively supported by PHPUnit 8+.
