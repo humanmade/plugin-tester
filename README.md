@@ -16,7 +16,7 @@ docker run --rm -v $PWD:/code humanmade/plugin-tester --stop-on-error
 
 ## Configuration
 
-To configure PHPUnit, place a `phpunit.dist.xml` in the plugin root. You can alternatively use the command line arguments for PHPUnit for simpler tests.
+To configure PHPUnit, place a `phpunit.xml.dist` in the plugin root. You can alternatively use the command line arguments for PHPUnit for simpler tests.
 
 Typically your `tests` directory in your plugin should include a `bootstrap.php` including at least the following:
 
@@ -41,7 +41,7 @@ WordPress requires PHPUnit 7, so slight adjustments need to be made to PHPUnit t
 composer require --dev pcov/clobber
 ```
 
-You can then set up coverage in your `phpunit.dist.xml`, or use the command-line flags:
+You can then set up coverage in your `phpunit.xml.dist`, or use the command-line flags:
 
 ```sh
 docker run --rm -v $PWD:/code humanmade/plugin-tester --coverage-text --whitelist inc/
