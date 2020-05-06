@@ -20,3 +20,19 @@ tests_add_filter( 'muplugins_loaded', function () {
 
 require '/wp-phpunit/includes/bootstrap.php';
 ```
+
+## Code Coverage
+
+Plugin Tester includes [pcov](https://github.com/krakjoe/pcov) for test coverage, which is natively supported by PHPUnit 8+.
+
+WordPress requires PHPUnit 7, so slight adjustments need to be made to PHPUnit to fix compatibility. Plugin Tester will do this automatically for you, provided you have [pcov-clobber](https://github.com/krakjoe/pcov-clobber) installed via Composer:
+
+```sh
+composer require --dev pcov/clobber
+```
+
+You can then set up coverage in your `phpunit.dist.xml`, or use the command-line flags:
+
+```sh
+docker run --rm -v $PWD:/code humanmade/plugin-tester --coverage-text --whitelist inc/
+```
