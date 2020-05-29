@@ -3,19 +3,21 @@ FROM alpine:3.11
 ARG WP_VERSION=5.4
 
 RUN apk add -u --no-cache \
-	php7 \
-	php7-pecl-imagick \
-	php7-dom \
-	php7-mysqli \
-	php7-xml \
-	php7-exif \
-	php7-simplexml \
-	php7-tokenizer \
-	php7-xmlwriter \
+	composer \
+	git \
+	imagemagick \
 	mysql \
 	mysql-client \
-	imagemagick \
-	composer
+	php7 \
+	php7-curl \
+	php7-dom \
+	php7-exif \
+	php7-mysqli \
+	php7-pecl-imagick \
+	php7-simplexml \
+	php7-tokenizer \
+	php7-xml \
+	php7-xmlwriter
 
 RUN apk add -u --no-cache php7-pecl-pcov --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
