@@ -19,7 +19,9 @@ RUN apk add -u --no-cache \
 	php7-xml \
 	php7-xmlwriter
 
-RUN apk add -u --no-cache php7-pecl-pcov --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+RUN apk add --no-cache php7-pear php7-dev gcc musl-dev make \
+	&& pecl install pcov && echo extension=pcov.so > /etc/php7/conf.d/pcov.ini \
+	&& apk del php7-pear php7-dev gcc musl-dev make
 
 RUN wget -nv -O /tmp/wordpress.tar.gz https://wordpress.org/wordpress-${WP_VERSION}.tar.gz \
 	&& mkdir /wordpress \
