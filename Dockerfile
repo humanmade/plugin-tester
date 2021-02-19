@@ -28,7 +28,7 @@ RUN wget -nv -O /tmp/wordpress.tar.gz https://wordpress.org/wordpress-${WP_VERSI
 	&& tar --strip-components=1 -zxmf /tmp/wordpress.tar.gz -C /wordpress \
 	&& rm /tmp/wordpress.tar.gz
 
-RUN wget -nv -O /tmp/wp-phpunit.tar.gz https://github.com/wp-phpunit/wp-phpunit/archive/5.4.0.tar.gz \
+RUN wget -nv -O /tmp/wp-phpunit.tar.gz https://github.com/wp-phpunit/wp-phpunit/archive/${WP_VERSION}.0.tar.gz \
 	&& mkdir /wp-phpunit \
 	&& tar --strip-components=1 -zxmf /tmp/wp-phpunit.tar.gz -C /wp-phpunit \
 	&& rm /tmp/wp-phpunit.tar.gz
