@@ -62,3 +62,135 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: humanmade/plugin-tester:wp-5.6
+
+      -
+        name: Build and push 5.7
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            WP_VERSION=5.7
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: humanmade/plugin-tester:wp-5.7
+
+      -
+        name: Build and push 5.8
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            WP_VERSION=5.8
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: humanmade/plugin-tester:wp-5.8
+
+      -
+        name: Build and push 5.9
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            WP_VERSION=5.9
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: humanmade/plugin-tester:wp-5.9
+
+      -
+        name: Build and push 6.0
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            WP_VERSION=6.0
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: humanmade/plugin-tester:wp-6.0
+
+      -
+        name: Build and push 6.1
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            WP_VERSION=6.1
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: humanmade/plugin-tester:wp-6.1
+
+      -
+        name: Build and push 6.2
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            WP_VERSION=6.2
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: humanmade/plugin-tester:wp-6.2
+
+      -
+        name: Build and push 6.3
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            WP_VERSION=6.3
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: humanmade/plugin-tester:wp-6.3
+
+      -
+        name: Build and push 6.4
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            WP_VERSION=6.4
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: humanmade/plugin-tester:wp-6.4
+
+      -
+        name: Build and push 6.5
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            WP_VERSION=6.5
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: humanmade/plugin-tester:wp-6.5
+
+      -
+        name: Build and push 6.6
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            WP_VERSION=6.6
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: humanmade/plugin-tester:wp-6.6
+
+      -
+        name: Build and push 6.7
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            WP_VERSION=6.7
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: humanmade/plugin-tester:wp-6.7
+
+      -
+        name: Build and push 6.8
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: |
+            WP_VERSION=6.8
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: humanmade/plugin-tester:wp-6.8
