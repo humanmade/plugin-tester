@@ -1,4 +1,4 @@
-FROM alpine:3.15
+FROM alpine:3.14
 
 ARG WP_VERSION=6.8
 
