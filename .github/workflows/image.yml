@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'master'
+  pull_request:
 
 jobs:
   docker:
@@ -30,7 +31,7 @@ jobs:
         with:
           context: .
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: ${{ github.ref == 'refs/heads/master' }}
           tags: humanmade/plugin-tester:latest
       -
         name: Build and push 5.4
@@ -40,7 +41,7 @@ jobs:
           build-args: |
             WP_VERSION=5.4
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: ${{ github.ref == 'refs/heads/master' }}
           tags: humanmade/plugin-tester:wp-5.4
       -
         name: Build and push 5.5
@@ -50,7 +51,7 @@ jobs:
           build-args: |
             WP_VERSION=5.5
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: ${{ github.ref == 'refs/heads/master' }}
           tags: humanmade/plugin-tester:wp-5.5
       -
         name: Build and push 5.6
@@ -60,7 +61,7 @@ jobs:
           build-args: |
             WP_VERSION=5.6
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: ${{ github.ref == 'refs/heads/master' }}
           tags: humanmade/plugin-tester:wp-5.6
 
       -
