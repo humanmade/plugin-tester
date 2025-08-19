@@ -1,6 +1,6 @@
 FROM alpine:3.19
 
-ARG WP_VERSION=6.8
+ARG WP_VERSION=6.6
 
 RUN apk add -u --no-cache \
 	composer \
