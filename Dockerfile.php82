@@ -20,7 +20,7 @@ RUN apk add -u --no-cache \
 	php82-xmlwriter
 
 RUN apk add --no-cache php82-pear php82-dev gcc musl-dev make \
-	&& pecl install pcov && echo extension=pcov.so > /etc/php82/conf.d/pcov.ini \
+	&& pecl82 install pcov && echo extension=pcov.so > /etc/php82/conf.d/pcov.ini \
 	&& apk del php82-pear php82-dev gcc musl-dev make
 
 RUN ln -sf /usr/bin/php82 /usr/bin/php
