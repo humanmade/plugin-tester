@@ -20,7 +20,8 @@ RUN apk add -u --no-cache \
 	php83-xmlwriter
 
 RUN apk add --no-cache php83-pear php83-dev gcc musl-dev make \
-	&& pecl83 install pcov && echo extension=pcov.so > /etc/php83/conf.d/pcov.ini \
+	&& pear config-set php_ini /etc/php83/php.ini \
+	&& pecl install pcov && echo extension=pcov.so > /etc/php83/conf.d/pcov.ini \
 	&& apk del php83-pear php83-dev gcc musl-dev make
 
 RUN ln -sf /usr/bin/php83 /usr/bin/php
