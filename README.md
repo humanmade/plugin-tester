@@ -2,7 +2,7 @@
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/humanmade/plugin-tester)](https://hub.docker.com/repository/docker/humanmade/plugin-tester) [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/humanmade/plugin-tester)](https://hub.docker.com/repository/docker/humanmade/plugin-tester)
 
-Simple Docker image for running unit tests for WordPress plugins.
+Simple Docker image for running unit tests for WordPress plugins with support for multiple PHP versions.
 
 To run the tests for your plugin, run this in your plugin directory:
 
@@ -14,6 +14,28 @@ You will need `phpunit/phpunit` specified as a Composer dependency of your plugi
 
 ```sh
 docker run --rm -v "$PWD:/code" humanmade/plugin-tester --stop-on-error
+```
+
+## PHP and WordPress Version Support
+
+This image supports multiple PHP versions (8.0, 8.1, 8.2, 8.3) and WordPress versions. You can specify a specific combination using the appropriate Docker tag:
+
+- `humanmade/plugin-tester:latest` - PHP 8.0 with WordPress 6.8 (default)
+- `humanmade/plugin-tester:php80-wp6.8` - PHP 8.0 with WordPress 6.8
+- `humanmade/plugin-tester:php81-wp6.8` - PHP 8.1 with WordPress 6.8
+- `humanmade/plugin-tester:php82-wp6.8` - PHP 8.2 with WordPress 6.8
+- `humanmade/plugin-tester:php83-wp6.8` - PHP 8.3 with WordPress 6.8
+
+For older WordPress versions, replace `wp6.8` with your desired version (e.g., `wp5.4`, `wp5.5`, `wp5.6`).
+
+**Examples:**
+
+```sh
+# Test with PHP 8.1 and WordPress 6.8
+docker run --rm -v "$PWD:/code" humanmade/plugin-tester:php81-wp6.8
+
+# Test with PHP 8.3 and WordPress 5.6
+docker run --rm -v "$PWD:/code" humanmade/plugin-tester:php83-wp5.6
 ```
 
 ## Configuration

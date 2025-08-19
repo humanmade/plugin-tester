@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM alpine:3.17
 
 ARG WP_VERSION=6.8
 
@@ -8,22 +8,22 @@ RUN apk add -u --no-cache \
 	imagemagick \
 	mysql \
 	mysql-client \
-	php8 \
-	php8-curl \
-	php8-dom \
-	php8-exif \
-	php8-mysqli \
-	php8-pecl-imagick \
-	php8-simplexml \
-	php8-tokenizer \
-	php8-xml \
-	php8-xmlwriter
+	php81 \
+	php81-curl \
+	php81-dom \
+	php81-exif \
+	php81-mysqli \
+	php81-pecl-imagick \
+	php81-simplexml \
+	php81-tokenizer \
+	php81-xml \
+	php81-xmlwriter
 
-RUN apk add --no-cache php8-pear php8-dev gcc musl-dev make \
-	&& pecl install pcov && echo extension=pcov.so > /etc/php8/conf.d/pcov.ini \
-	&& apk del php8-pear php8-dev gcc musl-dev make
+RUN apk add --no-cache php81-pear php81-dev gcc musl-dev make \
+	&& pecl install pcov && echo extension=pcov.so > /etc/php81/conf.d/pcov.ini \
+	&& apk del php81-pear php81-dev gcc musl-dev make
 
-RUN ln -sf /usr/bin/php8 /usr/bin/php
+RUN ln -sf /usr/bin/php81 /usr/bin/php
 
 RUN wget -nv -O /tmp/wordpress.tar.gz https://wordpress.org/wordpress-${WP_VERSION}.tar.gz \
 	&& mkdir /wordpress \

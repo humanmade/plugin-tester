@@ -9,6 +9,15 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php_version: ['8.0', '8.1', '8.2', '8.3']
+        wp_version: ['5.4', '5.5', '5.6', '6.8']
+        include:
+          # Default latest tag with PHP 8.0 and WP 6.8
+          - php_version: '8.0'
+            wp_version: '6.8'
+            is_latest: true
     steps:
       -
         name: Checkout
@@ -26,40 +35,24 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push latest
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: ${{ github.ref == 'refs/heads/master' }}
-          tags: humanmade/plugin-tester:latest
+        name: Generate tags and dockerfile
+        id: setup
+        run: |
+          PHP_SHORT=$(echo "${{ matrix.php_version }}" | tr -d '.')
+          if [ "${{ matrix.is_latest }}" == "true" ]; then
+            echo "tags=humanmade/plugin-tester:latest,humanmade/plugin-tester:php$PHP_SHORT-wp${{ matrix.wp_version }}" >> $GITHUB_OUTPUT
+          else
+            echo "tags=humanmade/plugin-tester:php$PHP_SHORT-wp${{ matrix.wp_version }}" >> $GITHUB_OUTPUT
+          fi
+          echo "dockerfile=Dockerfile.php$PHP_SHORT" >> $GITHUB_OUTPUT
       -
-        name: Build and push 5.4
+        name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
+          file: ${{ steps.setup.outputs.dockerfile }}
           build-args: |
-            WP_VERSION=5.4
+            WP_VERSION=${{ matrix.wp_version }}
           platforms: linux/amd64,linux/arm64
           push: ${{ github.ref == 'refs/heads/master' }}
-          tags: humanmade/plugin-tester:wp-5.4
-      -
-        name: Build and push 5.5
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          build-args: |
-            WP_VERSION=5.5
-          platforms: linux/amd64,linux/arm64
-          push: ${{ github.ref == 'refs/heads/master' }}
-          tags: humanmade/plugin-tester:wp-5.5
-      -
-        name: Build and push 5.6
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          build-args: |
-            WP_VERSION=5.6
-          platforms: linux/amd64,linux/arm64
-          push: ${{ github.ref == 'refs/heads/master' }}
-          tags: humanmade/plugin-tester:wp-5.6
+          tags: ${{ steps.setup.outputs.tags }}
