@@ -8,23 +8,23 @@ RUN apk add -u --no-cache \
 	imagemagick \
 	mysql \
 	mysql-client \
-	php83 \
-	php83-curl \
-	php83-dom \
-	php83-exif \
-	php83-mysqli \
-	php83-pecl-imagick \
-	php83-simplexml \
-	php83-tokenizer \
-	php83-xml \
-	php83-xmlwriter
+	php8 \
+	php8-curl \
+	php8-dom \
+	php8-exif \
+	php8-mysqli \
+	php8-pecl-imagick \
+	php8-simplexml \
+	php8-tokenizer \
+	php8-xml \
+	php8-xmlwriter
 
-RUN apk add --no-cache php83-pear php83-dev gcc musl-dev make \
-	&& pecl83 install pcov && echo extension=pcov.so > /etc/php83/conf.d/pcov.ini \
-	&& apk del php83-pear php83-dev gcc musl-dev make
+RUN apk add --no-cache php8-pear php8-dev gcc musl-dev make \
+	&& pecl8 install pcov && echo extension=pcov.so > /etc/php8/conf.d/pcov.ini \
+	&& apk del php8-pear php8-dev gcc musl-dev make
 
-# Create php symlink to php83
-RUN ln -sf /usr/bin/php83 /usr/bin/php
+# Create php symlink to php8
+RUN ln -sf /usr/bin/php8 /usr/bin/php
 
 RUN wget -nv -O /tmp/wordpress.tar.gz https://wordpress.org/wordpress-${WP_VERSION}.tar.gz \
 	&& mkdir /wordpress \

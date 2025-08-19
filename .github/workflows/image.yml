@@ -30,6 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          file: Dockerfile.php8.3
           platforms: linux/amd64,linux/arm64
           push: ${{ github.ref == 'refs/heads/master' }}
           tags: humanmade/plugin-tester:latest
@@ -39,6 +40,7 @@ jobs:
     strategy:
       matrix:
         wp_version: ['5.4', '5.5', '5.6', '5.7', '5.8', '5.9', '6.0', '6.1', '6.2', '6.3', '6.4', '6.5', '6.6', '6.7', '6.8']
+        php_version: ['8.0', '8.1', '8.2', '8.3']
     steps:
       -
         name: Checkout
@@ -56,13 +58,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push ${{ matrix.wp_version }}
+        name: Build and push WP ${{ matrix.wp_version }} PHP ${{ matrix.php_version }}
         uses: docker/build-push-action@v2
         with:
           context: .
+          file: Dockerfile.php${{ matrix.php_version }}
           build-args: |
             WP_VERSION=${{ matrix.wp_version }}
           platforms: linux/amd64,linux/arm64
           push: ${{ github.ref == 'refs/heads/master' }}
-          tags: humanmade/plugin-tester:wp-${{ matrix.wp_version }}
+          tags: humanmade/plugin-tester:wp-${{ matrix.wp_version }}-php${{ matrix.php_version }}
 
