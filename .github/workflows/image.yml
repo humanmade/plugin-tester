@@ -31,7 +31,7 @@ jobs:
         with:
           context: .
           platforms: linux/amd64,linux/arm64
-          push: ${{ github.ref == 'refs/heads/newer-wp' }}
+          push: ${{ github.ref == 'refs/heads/master' }}
           tags: humanmade/plugin-tester:latest
 
   docker-matrix:
@@ -63,6 +63,6 @@ jobs:
           build-args: |
             WP_VERSION=${{ matrix.wp_version }}
           platforms: linux/amd64,linux/arm64
-          push: ${{ github.ref == 'refs/heads/newer-wp' }}
+          push: ${{ github.ref == 'refs/heads/master' }}
           tags: humanmade/plugin-tester:wp-${{ matrix.wp_version }}
 
