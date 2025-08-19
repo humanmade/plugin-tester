@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM public.ecr.aws/docker/library/alpine:3.16
 
 ARG WP_VERSION=6.6
 
