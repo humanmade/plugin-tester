@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  docker:
+  docker-latest:
     runs-on: ubuntu-latest
     steps:
       -
@@ -33,33 +33,36 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: ${{ github.ref == 'refs/heads/master' }}
           tags: humanmade/plugin-tester:latest
+
+  docker-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        wp_version: ['5.4', '5.5', '5.6', '5.7', '5.8', '5.9', '6.0', '6.1', '6.2', '6.3', '6.4', '6.5', '6.6', '6.7', '6.8']
+    steps:
       -
-        name: Build and push 5.4
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push ${{ matrix.wp_version }}
         uses: docker/build-push-action@v2
         with:
           context: .
           build-args: |
-            WP_VERSION=5.4
+            WP_VERSION=${{ matrix.wp_version }}
           platforms: linux/amd64,linux/arm64
           push: ${{ github.ref == 'refs/heads/master' }}
-          tags: humanmade/plugin-tester:wp-5.4
-      -
-        name: Build and push 5.5
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          build-args: |
-            WP_VERSION=5.5
-          platforms: linux/amd64,linux/arm64
-          push: ${{ github.ref == 'refs/heads/master' }}
-          tags: humanmade/plugin-tester:wp-5.5
-      -
-        name: Build and push 5.6
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          build-args: |
-            WP_VERSION=5.6
-          platforms: linux/amd64,linux/arm64
-          push: ${{ github.ref == 'refs/heads/master' }}
-          tags: humanmade/plugin-tester:wp-5.6
+          tags: humanmade/plugin-tester:wp-${{ matrix.wp_version }}
+
