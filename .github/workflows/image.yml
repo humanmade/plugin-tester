@@ -3,7 +3,7 @@ name: ci
 on:
   push:
     branches:
-      - 'newer-wp'
+      - 'master'
   pull_request:
 
 jobs:
