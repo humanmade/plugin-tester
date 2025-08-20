@@ -82,6 +82,40 @@ jobs:
         run: docker run --rm -v $PWD:/code humanmade/plugin-tester
 ```
 
+### Testing Against Multiple WordPress and PHP Versions
+
+To test your plugin against multiple WordPress and PHP versions, you can use a matrix strategy. This will create separate jobs for each combination, ensuring your plugin works across different environments:
+
+```yaml
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        wp_version: ['6.6', '6.7', '6.8']
+        php_version: ['7.4', '8.1', '8.2', '8.3']
+        exclude:
+          # Exclude PHP 7.4 with WordPress 6.8 for example
+          - wp_version: '6.8'
+            php_version: '7.4'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: docker run --rm -v $PWD:/code --entrypoint='' humanmade/plugin-tester:wp-${{ matrix.wp_version }}-php${{ matrix.php_version }} composer install
+
+      - name: Run tests (WP ${{ matrix.wp_version }}, PHP ${{ matrix.php_version }})
+        run: docker run --rm -v $PWD:/code humanmade/plugin-tester:wp-${{ matrix.wp_version }}-php${{ matrix.php_version }}
+```
+
 ## Continuous Integration with Travis
 
 For Travis, the following minimal configuration will get your tests running:
