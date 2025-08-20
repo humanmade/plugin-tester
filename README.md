@@ -49,6 +49,33 @@ tests_add_filter( 'muplugins_loaded', function () {
 require '/wp-phpunit/includes/bootstrap.php';
 ```
 
+## Continuous Integration with Github Actions
+
+For Github Actions, you can use a workflow such as:
+
+
+```yaml
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: docker run --rm -v $PWD:/code --entrypoint='' humanmade/plugin-tester composer install
+
+      - name: Run tests
+        run: docker run --rm -v $PWD:/code humanmade/plugin-tester
+```
+
 ## Continuous Integration with Travis
 
 For Travis, the following minimal configuration will get your tests running:
