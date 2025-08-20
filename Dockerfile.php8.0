@@ -26,7 +26,7 @@ RUN apk add --no-cache php8-pear php8-dev gcc musl-dev make \
 # Create php symlink to php8
 RUN ln -sf /usr/bin/php8 /usr/bin/php
 
-RUN wget -nv -O /tmp/wordpress.tar.gz https://codeload.github.com/WordPress/WordPress/tar.gz/refs/tags/${WP_VERSION} \
+RUN wget -nv -O /tmp/wordpress.tar.gz https://wordpress.org/wordpress-${WP_VERSION}.tar.gz \
 	&& mkdir /wordpress \
 	&& tar --strip-components=1 -zxmf /tmp/wordpress.tar.gz -C /wordpress \
 	&& rm /tmp/wordpress.tar.gz
