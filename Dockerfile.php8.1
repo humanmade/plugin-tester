@@ -1,6 +1,6 @@
-FROM alpine:3.14
+FROM public.ecr.aws/docker/library/alpine:3.19
 
-ARG WP_VERSION=6.8
+ARG WP_VERSION
 
 RUN apk add -u --no-cache \
 	composer \
@@ -8,20 +8,23 @@ RUN apk add -u --no-cache \
 	imagemagick \
 	mysql \
 	mysql-client \
-	php7 \
-	php7-curl \
-	php7-dom \
-	php7-exif \
-	php7-mysqli \
-	php7-pecl-imagick \
-	php7-simplexml \
-	php7-tokenizer \
-	php7-xml \
-	php7-xmlwriter
+	php81 \
+	php81-curl \
+	php81-dom \
+	php81-exif \
+	php81-mysqli \
+	php81-pecl-imagick \
+	php81-simplexml \
+	php81-tokenizer \
+	php81-xml \
+	php81-xmlwriter
 
-RUN apk add --no-cache php7-pear php7-dev gcc musl-dev make \
-	&& pecl install pcov && echo extension=pcov.so > /etc/php7/conf.d/pcov.ini \
-	&& apk del php7-pear php7-dev gcc musl-dev make
+RUN apk add --no-cache php81-pear php81-dev gcc musl-dev make \
+	&& pecl81 install pcov && echo extension=pcov.so > /etc/php81/conf.d/pcov.ini \
+	&& apk del php81-pear php81-dev gcc musl-dev make
+
+# Create php symlink to php81
+RUN ln -sf /usr/bin/php81 /usr/bin/php
 
 RUN wget -nv -O /tmp/wordpress.tar.gz https://wordpress.org/wordpress-${WP_VERSION}.tar.gz \
 	&& mkdir /wordpress \

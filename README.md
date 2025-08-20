@@ -4,11 +4,27 @@
 
 Simple Docker image for running unit tests for WordPress plugins.
 
+**Supports multiple PHP versions:** 8.0, 8.1, 8.2, 8.3
+
 To run the tests for your plugin, run this in your plugin directory:
 
 ```sh
 docker run --rm -v "$PWD:/code" humanmade/plugin-tester
 ```
+
+You can also specify a specific WordPress and PHP version combination:
+
+```sh
+docker run --rm -v "$PWD:/code" humanmade/plugin-tester:wp-6.8-php8.3
+```
+
+Available tags follow the pattern `wp-{version}-php{version}`, e.g.:
+- `humanmade/plugin-tester:wp-6.8-php8.3`
+- `humanmade/plugin-tester:wp-6.7-php8.2` 
+- `humanmade/plugin-tester:wp-6.6-php8.1`
+- etc.
+
+The `latest` tag uses the newest WordPress version with PHP 8.3.
 
 You will need `phpunit/phpunit` specified as a Composer dependency of your plugin. Additional arguments can be passed to PHPUnit on the CLI directly, e.g.:
 
