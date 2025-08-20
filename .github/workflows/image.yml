@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         wp_version: ['6.0', '6.1', '6.2', '6.3', '6.4', '6.5', '6.6', '6.7', '6.8']
-        php_version: ['8.0', '8.1', '8.2', '8.3']
+        php_version: ['7.4', '8.0', '8.1', '8.2', '8.3']
     steps:
       -
         name: Checkout
@@ -41,6 +41,6 @@ jobs:
           push: ${{ github.ref == 'refs/heads/master' }}
           tags: |
             humanmade/plugin-tester:wp-${{ matrix.wp_version }}-php${{ matrix.php_version }}
-            ${{ matrix.php_version == '8.0' && format('humanmade/plugin-tester:wp-{0}', matrix.wp_version) || '' }}
-            ${{ matrix.php_version == '8.0' && matrix.wp_version == '6.8' && 'humanmade/plugin-tester:latest' || '' }}
+            ${{ matrix.php_version == '7.4' && format('humanmade/plugin-tester:wp-{0}', matrix.wp_version) || '' }}
+            ${{ matrix.php_version == '7.4' && matrix.wp_version == '6.8' && 'humanmade/plugin-tester:latest' || '' }}
 
