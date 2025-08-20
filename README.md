@@ -24,7 +24,13 @@ Available tags follow the pattern `wp-{version}-php{version}`, e.g.:
 - `humanmade/plugin-tester:wp-6.6-php8.1`
 - etc.
 
-The `latest` tag uses the newest WordPress version with PHP 8.3.
+WordPress-only tags are also available (defaulting to PHP 8.0):
+- `humanmade/plugin-tester:wp-6.8`
+- `humanmade/plugin-tester:wp-6.7`
+- `humanmade/plugin-tester:wp-6.6`
+- etc.
+
+The `latest` tag uses the newest WordPress version with PHP 8.0.
 
 You will need `phpunit/phpunit` specified as a Composer dependency of your plugin. Additional arguments can be passed to PHPUnit on the CLI directly, e.g.:
 
