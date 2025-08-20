@@ -4,6 +4,7 @@ ARG WP_VERSION
 
 RUN apk add -u --no-cache \
 	composer \
+	curl \
 	git \
 	imagemagick \
 	mysql \
@@ -26,12 +27,12 @@ RUN apk add --no-cache php82-pear php82-dev gcc musl-dev make \
 # Create php symlink to php82
 RUN ln -sf /usr/bin/php82 /usr/bin/php
 
-RUN wget -nv -O /tmp/wordpress.tar.gz https://wordpress.org/wordpress-${WP_VERSION}.tar.gz \
+RUN curl -fsSL -o /tmp/wordpress.tar.gz https://wordpress.org/wordpress-${WP_VERSION}.tar.gz \
 	&& mkdir /wordpress \
 	&& tar --strip-components=1 -zxmf /tmp/wordpress.tar.gz -C /wordpress \
 	&& rm /tmp/wordpress.tar.gz
 
-RUN wget -nv -O /tmp/wp-phpunit.tar.gz https://github.com/wp-phpunit/wp-phpunit/archive/${WP_VERSION}.0.tar.gz \
+RUN curl -fsSL -o /tmp/wp-phpunit.tar.gz https://github.com/wp-phpunit/wp-phpunit/archive/${WP_VERSION}.0.tar.gz \
 	&& mkdir /wp-phpunit \
 	&& tar --strip-components=1 -zxmf /tmp/wp-phpunit.tar.gz -C /wp-phpunit \
 	&& rm /tmp/wp-phpunit.tar.gz
