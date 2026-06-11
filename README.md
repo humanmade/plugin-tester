@@ -4,7 +4,7 @@
 
 Simple Docker image for running unit tests for WordPress plugins.
 
-**Supports multiple PHP versions:** 7.4, 8.0, 8.1, 8.2, 8.3
+**Supports multiple PHP versions:** 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5
 
 To run the tests for your plugin, run this in your plugin directory:
 
@@ -15,19 +15,19 @@ docker run --rm -v "$PWD:/code" humanmade/plugin-tester
 You can also specify a specific WordPress and PHP version combination:
 
 ```sh
-docker run --rm -v "$PWD:/code" humanmade/plugin-tester:wp-6.8-php8.3
+docker run --rm -v "$PWD:/code" humanmade/plugin-tester:wp-7.0-php8.5
 ```
 
 Available tags follow the pattern `wp-{version}-php{version}`, e.g.:
-- `humanmade/plugin-tester:wp-6.8-php7.4`
-- `humanmade/plugin-tester:wp-6.7-php8.2` 
-- `humanmade/plugin-tester:wp-6.6-php8.1`
+- `humanmade/plugin-tester:wp-7.0-php7.4`
+- `humanmade/plugin-tester:wp-6.9-php8.4` 
+- `humanmade/plugin-tester:wp-6.8-php8.5`
 - etc.
 
 WordPress-only tags are also available (defaulting to PHP 7.4):
+- `humanmade/plugin-tester:wp-7.0`
+- `humanmade/plugin-tester:wp-6.9`
 - `humanmade/plugin-tester:wp-6.8`
-- `humanmade/plugin-tester:wp-6.7`
-- `humanmade/plugin-tester:wp-6.6`
 - etc.
 
 The `latest` tag uses the newest WordPress version with PHP 7.4.
@@ -99,11 +99,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        wp_version: ['6.6', '6.7', '6.8']
-        php_version: ['7.4', '8.1', '8.2', '8.3']
+        wp_version: ['6.8', '6.9', '7.0']
+        php_version: ['7.4', '8.3', '8.4', '8.5']
         exclude:
-          # Exclude PHP 7.4 with WordPress 6.8 for example
-          - wp_version: '6.8'
+          # Exclude PHP 7.4 with WordPress 7.0 for example
+          - wp_version: '7.0'
             php_version: '7.4'
     steps:
       - name: Checkout code
